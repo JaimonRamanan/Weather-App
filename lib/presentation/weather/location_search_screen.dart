@@ -11,6 +11,7 @@ class LocationSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<WeatherBloc>();
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -19,15 +20,21 @@ class LocationSearchScreen extends StatelessWidget {
           children: [
             CommonTextField(
               hintText: "Enter city",
-              textEditingController: context.read<WeatherBloc>().cityNameCtr,
+              textEditingController: bloc.cityNameCtr,
             ),
             SizedBox(height: 20.h),
-            CommonButton(
-              btnName: "Get weather updates",
-              onTap: () {
-                context
-                    .read<WeatherBloc>()
-                    .add(const WeatherEvent.getWeather());
+            BlocConsumer<WeatherBloc, WeatherState>(
+              listener: (context, state) {
+                // Navigation to next page
+              },
+              builder: (context, state) {
+                return CommonButton(
+                  btnName: "Get weather updates",
+                  loading: state.weatherRes.loading,
+                  onTap: () {
+                    bloc.add(const WeatherEvent.getWeather());
+                  },
+                );
               },
             )
           ],

@@ -16,7 +16,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc(this.repo) : super(WeatherState.initial()) {
     on<_GetWeather>(
       (event, emit) async {
-        emit(state.copyWith.weatherRes(loading: true, error: null));
+        emit(state.copyWith.weatherRes(
+          data: null,
+          error: null,
+          loading: true,
+        ));
         try {
           final response = await repo.getCurrentWeatherForACity(
             cityName: cityNameCtr.text,
@@ -24,10 +28,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
           response.fold(
             (faiure) {
-              emit(state.copyWith.weatherRes(loading: true, error: faiure));
+              emit(state.copyWith.weatherRes(loading: false, error: faiure));
             },
             (res) {
-              emit(state.copyWith.weatherRes(loading: true, data: res));
+              emit(state.copyWith.weatherRes(loading: false, data: res));
             },
           );
         } catch (e) {
