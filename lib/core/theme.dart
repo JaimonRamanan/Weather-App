@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppTheme {
   static const white = Colors.white;
@@ -20,12 +19,12 @@ abstract class AppTheme {
     textTheme: TextTheme(
       titleSmall: TextStyle(
         color: white,
-        fontSize: 20.sp,
+        fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
       bodyMedium: TextStyle(
         color: white,
-        fontSize: 15.sp,
+        fontSize: 15,
       ),
     ),
     colorScheme: const ColorScheme.light(primary: primaryColor),

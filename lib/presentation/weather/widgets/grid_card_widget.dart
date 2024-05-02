@@ -26,7 +26,8 @@ class GridCardWidget extends StatelessWidget {
             Image.network(
               image?.contains("http:") ?? false ? image! : "http:$image",
             ),
-          if (subTitle != null) Text(subTitle!),
+          if (subTitle != null)
+            Text(subTitle!, style: Theme.of(context).textTheme.bodyMedium),
           Text(text, style: Theme.of(context).textTheme.titleSmall),
         ],
       ),
