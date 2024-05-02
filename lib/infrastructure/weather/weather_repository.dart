@@ -7,6 +7,7 @@ import 'package:weather_pulse/core/failure/failure.dart';
 import 'package:weather_pulse/domain/weather/i_weather_repo.dart';
 import 'package:weather_pulse/domain/weather/models/weather_model/weather_model.dart';
 
+import '../../core/constants.dart';
 import '../../core/services/http_service.dart';
 
 @LazySingleton(as: IWeatherRepo)
@@ -19,13 +20,14 @@ class WeatherRepository implements IWeatherRepo {
   Future<Either<Failure, WeatherModel>> getCurrentWeatherForACity({
     required String cityName,
   }) async {
-    final response = await httpService.request(
-      apiUrl: ApiEndpoints.weatherForACityEndpoint,
-    );
+    String apiUrl =
+        "${ApiEndpoints.weatherForACityEndpoint}?q=$cityName&key=$apiKey";
+    final response = await httpService.request(apiUrl: apiUrl);
 
     return response.fold(
       (l) => Left(l.keys.first),
       (res) async {
+        print(jsonDecode(res.body));
         return Right(WeatherModel.fromJson(jsonDecode(res.body)));
       },
     );

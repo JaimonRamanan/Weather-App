@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,13 +12,14 @@ part 'weather_bloc.freezed.dart';
 @injectable
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final IWeatherRepo repo;
+  TextEditingController cityNameCtr = TextEditingController();
   WeatherBloc(this.repo) : super(WeatherState.initial()) {
     on<_GetWeather>(
       (event, emit) async {
         emit(state.copyWith.weatherRes(loading: true, error: null));
         try {
           final response = await repo.getCurrentWeatherForACity(
-            cityName: event.city,
+            cityName: cityNameCtr.text,
           );
 
           response.fold(

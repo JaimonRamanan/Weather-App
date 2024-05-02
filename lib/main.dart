@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_pulse/core/di/injection.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_pulse/application/weather/weather_bloc.dart';
 
 import 'core/route/router.dart';
 
@@ -17,16 +19,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: AppRouter.generateRoute,
-        );
-      },
+    return BlocProvider(
+      create: (context) => getIt<WeatherBloc>(),
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: AppRouter.generateRoute,
+          );
+        },
+      ),
     );
   }
 }

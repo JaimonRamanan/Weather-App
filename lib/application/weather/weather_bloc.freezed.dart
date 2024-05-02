@@ -148,20 +148,19 @@ abstract class _Initial implements WeatherState {
 
 /// @nodoc
 mixin _$WeatherEvent {
-  String get city => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String city) getWeather,
+    required TResult Function() getWeather,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String city)? getWeather,
+    TResult? Function()? getWeather,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String city)? getWeather,
+    TResult Function()? getWeather,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,10 +180,6 @@ mixin _$WeatherEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $WeatherEventCopyWith<WeatherEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -192,8 +187,6 @@ abstract class $WeatherEventCopyWith<$Res> {
   factory $WeatherEventCopyWith(
           WeatherEvent value, $Res Function(WeatherEvent) then) =
       _$WeatherEventCopyWithImpl<$Res, WeatherEvent>;
-  @useResult
-  $Res call({String city});
 }
 
 /// @nodoc
@@ -205,30 +198,13 @@ class _$WeatherEventCopyWithImpl<$Res, $Val extends WeatherEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? city = null,
-  }) {
-    return _then(_value.copyWith(
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$GetWeatherImplCopyWith<$Res>
-    implements $WeatherEventCopyWith<$Res> {
+abstract class _$$GetWeatherImplCopyWith<$Res> {
   factory _$$GetWeatherImplCopyWith(
           _$GetWeatherImpl value, $Res Function(_$GetWeatherImpl) then) =
       __$$GetWeatherImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String city});
 }
 
 /// @nodoc
@@ -238,75 +214,51 @@ class __$$GetWeatherImplCopyWithImpl<$Res>
   __$$GetWeatherImplCopyWithImpl(
       _$GetWeatherImpl _value, $Res Function(_$GetWeatherImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? city = null,
-  }) {
-    return _then(_$GetWeatherImpl(
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$GetWeatherImpl implements _GetWeather {
-  const _$GetWeatherImpl({required this.city});
-
-  @override
-  final String city;
+  const _$GetWeatherImpl();
 
   @override
   String toString() {
-    return 'WeatherEvent.getWeather(city: $city)';
+    return 'WeatherEvent.getWeather()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetWeatherImpl &&
-            (identical(other.city, city) || other.city == city));
+        (other.runtimeType == runtimeType && other is _$GetWeatherImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, city);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetWeatherImplCopyWith<_$GetWeatherImpl> get copyWith =>
-      __$$GetWeatherImplCopyWithImpl<_$GetWeatherImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String city) getWeather,
+    required TResult Function() getWeather,
   }) {
-    return getWeather(city);
+    return getWeather();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String city)? getWeather,
+    TResult? Function()? getWeather,
   }) {
-    return getWeather?.call(city);
+    return getWeather?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String city)? getWeather,
+    TResult Function()? getWeather,
     required TResult orElse(),
   }) {
     if (getWeather != null) {
-      return getWeather(city);
+      return getWeather();
     }
     return orElse();
   }
@@ -341,12 +293,5 @@ class _$GetWeatherImpl implements _GetWeather {
 }
 
 abstract class _GetWeather implements WeatherEvent {
-  const factory _GetWeather({required final String city}) = _$GetWeatherImpl;
-
-  @override
-  String get city;
-  @override
-  @JsonKey(ignore: true)
-  _$$GetWeatherImplCopyWith<_$GetWeatherImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _GetWeather() = _$GetWeatherImpl;
 }
