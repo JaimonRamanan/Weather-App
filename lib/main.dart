@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_pulse/core/di/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  /// Init dependancy injection
+  configureDependancies();
   runApp(const MyApp());
 }
 
