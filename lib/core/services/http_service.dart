@@ -4,12 +4,14 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../failure/failure.dart';
 import 'package:retry/retry.dart';
 
 enum HttpMethod { get }
 
+@LazySingleton()
 class HttpService {
   HttpService._internal();
 
