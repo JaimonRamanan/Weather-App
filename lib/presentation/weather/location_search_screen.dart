@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_pulse/application/weather/weather_bloc.dart';
+import 'package:weather_pulse/core/route/route_names.dart';
 import 'package:weather_pulse/presentation/widgets/common_text_field.dart';
 
 import '../widgets/common_button.dart';
@@ -25,7 +26,9 @@ class LocationSearchScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             BlocConsumer<WeatherBloc, WeatherState>(
               listener: (context, state) {
-                // Navigation to next page
+                if (state.weatherRes.data != null) {
+                  Navigator.pushNamed(context, RouteNames.detailScreen);
+                }
               },
               builder: (context, state) {
                 return CommonButton(
