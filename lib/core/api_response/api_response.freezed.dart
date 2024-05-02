@@ -20,6 +20,7 @@ mixin _$ApiResponse<T> {
   int? get statusCode => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   Failure? get error => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ApiResponseCopyWith<T, ApiResponse<T>> get copyWith =>
@@ -32,7 +33,12 @@ abstract class $ApiResponseCopyWith<T, $Res> {
           ApiResponse<T> value, $Res Function(ApiResponse<T>) then) =
       _$ApiResponseCopyWithImpl<T, $Res, ApiResponse<T>>;
   @useResult
-  $Res call({T? data, int? statusCode, String? message, Failure? error});
+  $Res call(
+      {T? data,
+      int? statusCode,
+      String? message,
+      Failure? error,
+      bool loading});
 
   $FailureCopyWith<$Res>? get error;
 }
@@ -54,6 +60,7 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
     Object? statusCode = freezed,
     Object? message = freezed,
     Object? error = freezed,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
       data: freezed == data
@@ -72,6 +79,10 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -96,7 +107,12 @@ abstract class _$$ApiResponseImplCopyWith<T, $Res>
       __$$ApiResponseImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({T? data, int? statusCode, String? message, Failure? error});
+  $Res call(
+      {T? data,
+      int? statusCode,
+      String? message,
+      Failure? error,
+      bool loading});
 
   @override
   $FailureCopyWith<$Res>? get error;
@@ -117,6 +133,7 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
     Object? statusCode = freezed,
     Object? message = freezed,
     Object? error = freezed,
+    Object? loading = null,
   }) {
     return _then(_$ApiResponseImpl<T>(
       data: freezed == data
@@ -135,6 +152,10 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -142,7 +163,12 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$ApiResponseImpl<T> implements _ApiResponse<T> {
-  _$ApiResponseImpl({this.data, this.statusCode, this.message, this.error});
+  _$ApiResponseImpl(
+      {this.data,
+      this.statusCode,
+      this.message,
+      this.error,
+      this.loading = false});
 
   @override
   final T? data;
@@ -152,10 +178,13 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
   final String? message;
   @override
   final Failure? error;
+  @override
+  @JsonKey()
+  final bool loading;
 
   @override
   String toString() {
-    return 'ApiResponse<$T>(data: $data, statusCode: $statusCode, message: $message, error: $error)';
+    return 'ApiResponse<$T>(data: $data, statusCode: $statusCode, message: $message, error: $error, loading: $loading)';
   }
 
   @override
@@ -167,12 +196,18 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(data), statusCode, message, error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      statusCode,
+      message,
+      error,
+      loading);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +222,8 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
       {final T? data,
       final int? statusCode,
       final String? message,
-      final Failure? error}) = _$ApiResponseImpl<T>;
+      final Failure? error,
+      final bool loading}) = _$ApiResponseImpl<T>;
 
   @override
   T? get data;
@@ -197,6 +233,8 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   String? get message;
   @override
   Failure? get error;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$$ApiResponseImplCopyWith<T, _$ApiResponseImpl<T>> get copyWith =>

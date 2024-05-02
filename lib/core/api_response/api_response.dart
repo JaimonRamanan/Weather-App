@@ -11,5 +11,6 @@ class ApiResponse<T> with _$ApiResponse<T> {
     int? statusCode,
     String? message,
     Failure? error,
+    @Default(false) bool loading,
   }) = _ApiResponse<T>;
 }
