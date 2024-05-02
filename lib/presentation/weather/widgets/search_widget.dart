@@ -47,7 +47,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 loading: state.weatherRes.loading,
                 onTap: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    bloc.add(const WeatherEvent.getWeather());
+                    bloc.add(WeatherEvent.getWeather(context: context));
                   }
                 },
               );

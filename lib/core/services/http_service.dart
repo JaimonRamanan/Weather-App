@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../failure/failure.dart';
@@ -31,7 +32,13 @@ class HttpService {
           response.statusCode == HttpStatus.created) {
         return Right(response);
       } else {
-        return Left({const Failure.clientFailure(): jsonDecode(response.body)});
+        String message = "Something went wrong";
+        try {
+          message = jsonDecode(response.body)["error"]["message"];
+        } catch (e) {
+          debugPrint(e.toString());
+        }
+        return Left({const Failure.clientFailure(): message});
       }
     } on FormatException catch (_) {
       return Left({const Failure.clientFailure(): null});

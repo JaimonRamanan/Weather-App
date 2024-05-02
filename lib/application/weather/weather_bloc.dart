@@ -23,6 +23,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         ));
         try {
           final response = await repo.getCurrentWeatherForACity(
+            context: event.context,
             cityName: cityNameCtr.text,
           );
 
