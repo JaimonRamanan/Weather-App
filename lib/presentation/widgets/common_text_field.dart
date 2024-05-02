@@ -23,14 +23,18 @@ class CommonTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textEditingController,
       keyboardType: keyboardType,
+      controller: textEditingController,
       inputFormatters: inputFormatters,
+      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: Theme.of(context).hintColor,
+          ),
       decoration: InputDecoration(
+        filled: true,
         hintStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
               color: Theme.of(context).hintColor,
             ),
-        fillColor: Theme.of(context).cardColor,
+        fillColor: Theme.of(context).focusColor.withOpacity(0.2),
         border: InputBorder.none,
         hintText: hintText,
         contentPadding:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_pulse/core/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_pulse/core/di/injection.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return const MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
             onGenerateRoute: AppRouter.generateRoute,
           );
         },
