@@ -18,12 +18,14 @@ class HttpService {
   static final HttpService _instance = HttpService._internal();
   factory HttpService() => _instance;
 
-  Future<Either<Map<Failure, dynamic>, Response>> request(
-      {dynamic data, required String apiUrl}) async {
+  Future<Either<Map<Failure, dynamic>, Response>> request({
+    dynamic data,
+    required String apiUrl,
+    HttpMethod method = HttpMethod.get,
+  }) async {
     try {
       Client client = Client();
-      Response response =
-          await httpSwitchMethod(apiUrl, client, HttpMethod.get);
+      Response response = await httpSwitchMethod(apiUrl, client, method);
 
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
